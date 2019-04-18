@@ -1,6 +1,6 @@
 {
     "name": "koriym/fake-jsons",
-    "description": "",
+    "description": "Fake JSON generator by directory",
     "license": "MIT",
     "authors": [
         {
@@ -9,7 +9,10 @@
         }
     ],
     "require": {
-        "php": ">=7.1.0"
+        "php": ">=7.1.0",
+        "ext-json": "*",
+        "leko/json-schema-faker": "dev-ref-schema",
+        "justinrainbow/json-schema": "^5.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^7.5",
@@ -18,6 +21,12 @@
         "phpmd/phpmd": "^2.6",
         "phpstan/phpstan-shim": "^0.10"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/koriym/php-json-schema-faker"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "Koriym\\FakeJsons\\": "src/"
