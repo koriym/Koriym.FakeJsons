@@ -21,11 +21,10 @@ final class FakeJsons
             $schema = json_decode($schemaJson);
             try {
                 $fake = $faker->generate($schema);
-                if (! $fake instanceof \stdClass) {
-                    throw new \RuntimeException('Faker return no JSON');
-                }
                 $schemaFilname = $fileInfo->getFilename();
-                $fake->{'$schema'} = sprintf('%s/%s', $schemaUri, $schemaFilname);
+                if ($fake instanceof \stdClass) {
+                    $fake->{'$schema'} = sprintf('%s/%s', $schemaUri, $schemaFilname);
+                }
                 $distName = sprintf('%s/%s', $distDir, $schemaFilname);
                 $fakeJson = json_encode($fake, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . PHP_EOL;
                 file_put_contents($distName, $fakeJson);
