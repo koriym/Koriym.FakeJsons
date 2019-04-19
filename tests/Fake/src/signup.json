@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "hotelId": {
+      "type": "string"
+    },
+    "_embedded": {"$ref": "#/definitions/_embedded"},
+    "_links": { "$ref": "#/definitions/_links"}
+  },
+  "required":  [
+    "hotelId",
+    "_embedded",
+    "_links"
+  ],
+  "definitions": {
+    "_embedded": {
+      "type": "object",
+      "properties": {
+        "user": {"$ref": "./user.json"}
+      },
+      "required": ["user"]
+    },
+    "_links": {
+      "type": "object",
+      "properties": {
+        "cc:new-user": {"$ref": "def/link.json"}
+      },
+      "required": [
+        "cc:new-user"
+      ],
+      "additionalProperties": true
+    }
+  }
+}

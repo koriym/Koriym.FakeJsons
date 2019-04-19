@@ -1,0 +1,68 @@
+{
+  "$id": "user.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "user",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "latinName": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "nationality": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 3
+    },
+    "gender": {
+      "type": "string",
+      "$comment": "M)男性 F)女性",
+      "enum": [
+        "M",
+        "F"
+      ]
+    },
+    "address": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "maxLength": 255
+    },
+    "telephone": {
+      "type": "string",
+      "maxLength": 64,
+      "pattern": "^[0-9()-]+$"
+    },
+    "birthDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "passportImageId": {
+      "type": "string"
+    },
+    "password": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 256
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "nationality",
+    "address",
+    "email",
+    "telephone",
+    "password"
+  ],
+  "additionalProperties": true
+}

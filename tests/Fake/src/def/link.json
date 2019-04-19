@@ -1,0 +1,23 @@
+{
+  "$id": "def/link.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "HAL link property schema",
+  "type": "object",
+  "properties": {
+    "rel": {
+      "type": "string",
+      "examples": ["next"]
+    },
+    "href": {
+      "type": "string",
+      "format": "uri",
+      "examples": ["http://example/rel"]
+    },
+    "method": {
+      "type": "string",
+      "enum": ["get", "post", "put", "delete", "patch"]
+    }
+  },
+  "required": ["rel", "href"],
+  "additionalProperties": true
+}
