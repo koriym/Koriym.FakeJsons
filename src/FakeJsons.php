@@ -10,7 +10,7 @@ final class FakeJsons
 {
     public function __invoke(string $schemaDir, string $distDir, string $schemaUri) : void
     {
-        $faker = new Faker;
+        $faker = new Faker($schemaDir);
         foreach ($this->files($schemaDir, 'json') as $fileInfo) {
             /** @var \SplFileInfo $fileInfo */
             $schemaPath = $fileInfo->getPathname();
@@ -20,7 +20,7 @@ final class FakeJsons
             }
             $schema = json_decode($schemaJson);
             try {
-                $fake = $faker->generate($schema, $schemaDir);
+                $fake = $faker->generate($schema);
                 if (! $fake instanceof \stdClass) {
                     throw new \RuntimeException('Faker return no JSON');
                 }
