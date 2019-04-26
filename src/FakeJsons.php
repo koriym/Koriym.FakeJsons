@@ -10,17 +10,11 @@ final class FakeJsons
 {
     public function __invoke(string $schemaDir, string $distDir, string $schemaUri) : void
     {
-        $faker = new Faker($schemaDir);
+        $faker = new Faker;
         foreach ($this->files($schemaDir, 'json') as $fileInfo) {
-            /** @var \SplFileInfo $fileInfo */
-            $schemaPath = $fileInfo->getPathname();
-            $schemaJson = file_get_contents($schemaPath);
-            if (! is_string($schemaJson) || $schemaJson === '') {
-                continue;
-            }
-            $schema = json_decode($schemaJson);
+            /* @var \SplFileInfo $fileInfo */
             try {
-                $fake = $faker->generate($schema);
+                $fake = $faker->generate($fileInfo);
                 $schemaFilname = $fileInfo->getFilename();
                 if ($fake instanceof \stdClass) {
                     $fake->{'$schema'} = sprintf('%s/%s', $schemaUri, $schemaFilname);

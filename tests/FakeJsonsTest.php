@@ -23,8 +23,8 @@ class FakeJsonsTest extends TestCase
     {
         ($this->fakeJsons)(__DIR__ . '/Fake/src', __DIR__ . '/Fake/dist', 'http://example.com/schema');
         $validator = new Validator;
-        $data = json_decode(file_get_contents( __DIR__ . '/Fake/dist/signup.json'));
-        $validator->validate($data, (object)['$ref' => 'file://' . __DIR__ . '/Fake/src/signup.json']);
+        $data = json_decode((string) file_get_contents(__DIR__ . '/Fake/dist/signup.json'));
+        $validator->validate($data, (object) ['$ref' => 'file://' . __DIR__ . '/Fake/src/signup.json']);
         foreach ($validator->getErrors() as $error) {
             echo sprintf("[%s] %s\n", $error['property'], $error['message']);
         }
