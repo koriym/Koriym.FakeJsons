@@ -11,7 +11,7 @@
     "require": {
         "php": ">=7.1.0",
         "ext-json": "*",
-        "leko/json-schema-faker": "dev-ref-schema",
+        "leko/json-schema-faker": "dev-develop",
         "justinrainbow/json-schema": "^5.2"
     },
     "require-dev": {
