@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace Koriym\FakeJsons;
 
+use function file_exists;
 use JSONSchemaFaker\Faker;
+use const PHP_EOL;
+use function str_replace;
 
 final class FakeJsons
 {
@@ -19,9 +22,16 @@ final class FakeJsons
                 if ($fake instanceof \stdClass) {
                     $fake->{'$schema'} = sprintf('%s/%s', $schemaUri, $schemaFilname);
                 }
-                $distName = sprintf('%s/%s', $distDir, $schemaFilname);
+                $targetPath = $distDir . str_replace($schemaDir, '', $fileInfo->getPath());
+                if (! file_exists($targetPath)) {
+                    if (!mkdir($targetPath, 0755, true) && !is_dir($targetPath)) {
+                        throw new \RuntimeException(sprintf('Directory "%s" was not created', $targetPath));
+                    }
+                }
+                $distFile = sprintf('%s/%s', $targetPath, $schemaFilname);
                 $fakeJson = json_encode($fake, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . PHP_EOL;
-                file_put_contents($distName, $fakeJson);
+                echo $distFile . PHP_EOL;
+                file_put_contents($distFile, $fakeJson);
             } catch (\Exception $e) {
                 printf("%s: %s %s on line %d\n", $fileInfo->getFilename(), $e->getMessage(), $e->getFile(), $e->getLine());
 
